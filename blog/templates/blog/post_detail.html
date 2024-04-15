@@ -1,0 +1,38 @@
+{% extends "parent/base.html" %}
+{% block title %} post detail {% endblock %}
+{% load blog_tags %}
+
+{% block content %}
+
+<h1>post detail</h1>
+<h1>{{ post.title }} <a href="{% url 'blog:account_view' post.author_id %}">(by {{ post.author }})</a></h1>
+    <p>{{ post.description | markdown | sansor }}</p>
+<hr>
+<p>{{ post.publish }}</p>
+
+<div>{% with comments.count as cc %}
+{{ cc }} comment{{ cc|pluralize }}
+{% endwith %}
+</div>
+
+<div>{% for comment in comments %}
+    {{ comment.message }}
+    <br>
+    {{ comment.name }}
+    {% empty %}
+    کامنتی وجود ندارد
+{% endfor %}
+
+
+
+<form method="post" action={% url "blog:post_comment" post.id %}>
+{% csrf_token %}
+ {{ form.as_p }}
+<input type="submit" value="اضافه کردن کامنت">
+
+
+
+</form>
+
+
+{% endblock %}

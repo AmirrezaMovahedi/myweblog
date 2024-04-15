@@ -1,0 +1,21 @@
+{% extends "parent/base.html" %}
+{% block title %} login {% endblock %}
+
+{% block content %}
+
+
+<h1>اطلاعات خود را وارد کنید</h1>
+
+    <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+        <input type="hidden" name="text" value={{ next }} >
+    <input type="submit" value="login">
+
+    <a href="{% url 'blog:password_reset' %}">آیا رمز خود را فراموش کرده اید </a>
+    </form>
+
+
+
+
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends "parent/base.html" %}
+{% load blog_tags %}
+{% block title %} post list {% endblock %}
+{% block content %}
+
+
+ <ol style="--length: {{ posts.count }}" role="list">
+
+<h1>post list</h1>
+{% for post in posts %}
+    <li style="--i: {{ forloop.counter }}">
+    <h3><a href= {{ post.get_absolute_url }}>{{ post.title }} </a></h3>
+    <p>{{ post.description | truncatewords:4 | markdown | sansor }}</p>
+    <img src="{{ post.images.first.image_file.url }}" alt="{{ post.images.first.title }}">
+    </li>
+{% endfor %}
+ </ol>
+
+{% include "partiels/pagination.html" with page_obj=posts %}
+{% endblock %}
+

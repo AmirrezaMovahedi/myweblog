@@ -1,0 +1,23 @@
+{% extends "parent/base.html" %}
+{% block title %} edit account {% endblock %}
+
+{% block content %}
+
+
+<h1>اطلاعات خود را ویرایش کنید</h1>
+
+    <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+        {{ user_form.as_p }}
+        <br>
+        {{ account_form.as_p }}
+
+    <input type="submit" value="edit">
+
+
+    </form>
+
+
+
+
+{% endblock %}

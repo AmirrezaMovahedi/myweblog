@@ -1,0 +1,18 @@
+{% extends "parent/base.html" %}
+{% load blog_tags %}
+{% block title %} post delete  {% endblock %}
+{% block content %}
+
+    <h2>آیا میخواهید پست را حذف کنید ({{ post.title }})</h2>
+    <a href={% url 'blog:profile' %}>بازگشت به پروفایل</a>
+    <br>
+    <form method="post">
+    {% csrf_token %}
+    <input type="submit" value="delete">
+    </form>
+
+
+
+
+{% include "partiels/pagination.html" with page_obj=page_obj %}
+{% endblock %}

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        /* استایل هدر */
+        header {
+            background-color: #333;
+            padding: 20px;
+            text-align: center;
+        }
+
+        /* استایل مربع */
+        header a.square {
+            display: inline-block;
+            width: 100px;
+            height: 40px;
+            background-color: red;
+        }
+
+        header a.register {
+            display: inline-block;
+            width: 100px;
+            height: 40px;
+            background-color: blue;
+        }
+
+        /* استایل متن داخل مربع */
+        header a.square span {
+            color: white;
+            font-size: 24px;
+            line-height: 40px;
+            text-align: center;
+        }
+        header a.register span {
+            color: white;
+            font-size: 24px;
+            line-height: 40px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        {% if request.user.is_authenticated %}
+     <a class="square" href="#">
+            <span>{{ request.user.username }}</span>
+      </a>
+        {% else %}
+      <a class="square" href={% url 'blog:login' %}>
+            <span>login</span>
+
+        </a>
+
+        {% endif %}
+
+    <a class="register" href="{% url 'blog:register' %}">
+        <span>register</span>
+    </a>
+
+    <h1>دسته بندی</h1>
+    <a href="{% url 'blog:post_list_category' 'technology' %}" style="color: white">technology</a>
+
+    <a href="{% url 'blog:post_list_category' 'programing' %}" style="color: white">programing language</a>
+
+    <a href="{% url 'blog:post_list_category' 'Artificial' %}" style="color: white">Artificial intelligence</a>
+
+    <a href="{% url 'blog:post_list_category' 'other' %}" style="color: white">other</a>
+
+
+
+
+    </header>
+</body>
+</html>
+
+<form method="get" action={% url 'blog:post_search' %}>
+    <input type="text" name="query" placeholder="کلمه را برای جست و جو وارد کنید ">
+    <input type="submit" value="search">
+
+    <a href="{% url 'blog:profile' %}">PROFILE</a>
+
+</form>

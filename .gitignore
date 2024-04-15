@@ -1,0 +1,18 @@
+
+/blogdata.json
+
+*.log
+*.pdf
+*.png
+
+# IDE
+.idea/ # PyCharm settings
+
+
+# Python
+*.pyc
+env/
+venv/
+
+# Databases
+*.sqlite3

@@ -1,0 +1,17 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" type="text/css" href={% static "css/base.css" %}>
+    {% block head %}{% endblock %}
+</head>
+<body>
+{% include "partiels/header.html" %}
+{% include "partiels/navigation.html" %}
+{% block content %}{% endblock %}
+{% include "partiels/footer.html" %}
+
+</body>
+</html>

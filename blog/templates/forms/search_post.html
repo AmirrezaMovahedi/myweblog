@@ -1,0 +1,19 @@
+{% extends "parent/base.html" %}
+{% block title %} post comments {% endblock %}
+
+{% block content %}
+    {% if query %}
+        <p>نتایح جست و جو برای {{ query }}</p>
+        <p>تعداد یافته ها:{{ result.count  }}</p>
+    {% for p in result %}
+
+            <a href={{ p.get_absolute_url  }}>{{ p.title }}</a>
+            <p>{{ p.description }}</p>
+             {% empty %}
+            <p>نتیجه ای یافت نشد </p>
+        {% endfor %}
+    {% endif %}
+
+
+
+{% endblock %}

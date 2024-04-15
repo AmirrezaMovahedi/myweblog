@@ -1,0 +1,22 @@
+{% extends "parent/base.html" %}
+{% load blog_tags %}
+{% block title %} index {% endblock %}
+{% block content %}
+
+    <h1>آمار سایت</h1>
+    <p>تعداد پست ها:{% post_tag %} </p>
+    <p>تعداد کامنت ها: {% comment_tag %}</p>
+    <p>تاریخ آخرین پست :{% post_publish_tag %}</p>
+    <p>فعال ترین کاریر: {% best_user %}</p>
+
+    <h2>محبوب ترین پست ها</h2>
+    {% best_post as pop_post %}
+    {% for post in pop_post %}
+        <p><a href={{ post.get_absolute_url }}>{{ post.title }}</a>{{ post.comments_count }} comments</p>
+    {% endfor %}
+{% latest_post 3 %}
+{% m_and_n %}
+
+<p>Random Post</p>
+    <a href="{{ post.get_absolute_url }}">{{ post.title }}</a>
+{% endblock %}
