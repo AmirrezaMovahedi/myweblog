@@ -10,8 +10,8 @@
 {% for post in posts %}
     <li style="--i: {{ forloop.counter }}">
     <h3><a href= {{ post.get_absolute_url }}>{{ post.title }} </a></h3>
-    <p>{{ post.description | truncatewords:4 | markdown | sansor }}</p>
-    <img src="{{ post.images.first.image_file.url }}" alt="{{ post.images.first.title }}">
+    <p>{{ post.description | truncatewords:4 | sansor }}</p>
+    <img src="{{ post.images.first.image_file.url }}" alt="{{ post.images.first.title }}" width="500" height="500">
     </li>
 {% endfor %}
  </ol>
