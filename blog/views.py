@@ -45,13 +45,6 @@ def post_list(request, category=None):
     return render(request, 'blog/post_list.html', context)
 
 
-# class PostListView(ListView):
-#     queryset = Post.published.all()
-#     context_object_name = "posts"
-#     paginate_by = 2
-#     template_name = 'blog/post_list.html'
-
-
 def post_detail(request, pk):
     post = Post.objects.get(id=pk)
     comments = post.comments.filter(active=True)
@@ -63,11 +56,6 @@ def post_detail(request, pk):
     }
 
     return render(request, 'blog/post_detail.html', context)
-
-
-# class PostDetailView(DetailView):
-#     model = Post
-#     template_name = 'blog/post_detail.html'
 
 
 def ticket(request):
@@ -106,26 +94,6 @@ def post_comment(request, post_id):
     }
 
     return render(request, "forms/comment.html", context)
-
-
-def post_form(request):
-    if request.method == "POST":
-        pform = PostForm(data=request.POST)
-        if pform.is_valid():
-            cd = pform.cleaned_data
-            post_object = Post.objects.create(author=cd["author"], reading_time=cd["reading_time"])
-            # post_object.author = cd["author"]
-            post_object.title = cd["title"]
-            post_object.description = cd["description"]
-            post_object.slug = cd["slug"]
-            post_object.status = cd["status"]
-            post_object.publish = cd["publish"]
-            # post_object.reading_time = cd["reading_time"]
-            post_object.save()
-            return redirect("blog:post_list")
-    else:
-        pform = PostForm()
-    return render(request, "forms/postform.html", {"pform": pform})
 
 
 def post_search_view(request):
@@ -228,26 +196,6 @@ def image_delete(request, image_id):
     image = Image.objects.get(id=image_id)
     image.delete()
     return redirect('blog:profile')
-
-
-# def user_login(request):
-#     if request.method == "POST":
-#         form = User_Login(request.POST)
-#         if form.is_valid():
-#             cd = form.cleaned_data
-#             user = authenticate(request, username=cd['username'], password=cd['password'])
-#             if user is not None:
-#                 if user.is_active:
-#                     login(request, user)
-#                     return redirect('blog:profile')
-#                 else:
-#                     return HttpResponse('You are not logged in ')
-#             else:
-#                 return HttpResponse('it was not exist')
-#
-#     else:
-#         form = User_Login()
-#         return render(request,'forms/login.html', {'form': form})
 
 
 def user_register_view(request):

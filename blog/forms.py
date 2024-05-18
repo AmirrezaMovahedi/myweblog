@@ -39,28 +39,6 @@ class CommentForm(forms.ModelForm):
                 return name
 
 
-class PostForm(forms.Form):
-    Status_CHOICES = (
-        ("DR", "Draft"),
-        ("PU", "Published"),
-        ("RE", "Rejected"),
-    )
-
-    author = forms.ModelChoiceField(queryset=User.objects.all())
-    title = forms.CharField(max_length=250)
-    description = forms.CharField(widget=forms.Textarea())
-    slug = forms.SlugField(required=True)
-    status = forms.ChoiceField(choices=Status_CHOICES, required=True)
-    publish = forms.DateTimeField(initial=timezone.now())
-    reading_time = forms.IntegerField(min_value=1)
-
-    def clean_description(self):
-        description = self.cleaned_data["description"]
-        if description:
-            if len(description) >= 50:
-                raise forms.ValidationError("the description has very char  ")
-            else:
-                return description
 
 
 class SearchFrom(forms.Form):
